@@ -1,4 +1,4 @@
-# Behat Fixtures in Laravel
+# Data fixtures in Behat with Laravel
 
 ## Installation
 
