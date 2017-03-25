@@ -5,6 +5,7 @@ namespace Brunty\LaravelBehatFixtures;
 use Behat\Behat\Hook\Scope\BeforeScenarioScope;
 use Behat\Behat\Hook\Scope\ScenarioScope;
 use Behat\MinkExtension\Context\MinkContext;
+use Illuminate\Support\Facades\Artisan;
 
 /**
  * Due to using laracasts/behat-laravel-extension we have to extend MinkContext
