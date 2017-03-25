@@ -1,0 +1,23 @@
+{
+    "name": "brunty/laravel-behat-fixtures",
+    "description": "Provides a way to load fixture data into the DB when using Behat with Laravel",
+    "type": "library",
+    "require": {
+        "laracasts/behat-laravel-extension": "^1.0",
+        "behat/behat": "^3.3",
+        "behat/mink": "^1.7",
+        "behat/mink-extension": "^2.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "Brunty\\LaravelBehatFixtures\\": ""
+        }
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Matt Brunt",
+            "email": "matt@mfyu.co.uk"
+        }
+    ]
+}
