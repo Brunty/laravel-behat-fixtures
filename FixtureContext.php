@@ -17,7 +17,7 @@ class FixtureContext extends MinkContext
     /**
      * @var bool
      */
-    private $tagLoaded = false;
+    private $tagsAlreadyLoaded = false;
 
     /**
      * @var array
@@ -29,6 +29,9 @@ class FixtureContext extends MinkContext
      */
     private $fixtureDirectory;
 
+    /**
+     * @param string $fixtureDirectory
+     */
     public function __construct($fixtureDirectory)
     {
         $this->fixtureDirectory = $fixtureDirectory;
@@ -59,7 +62,7 @@ class FixtureContext extends MinkContext
      */
     private function storeTags(BeforeScenarioScope $event)
     {
-        if ($this->tagLoaded === false) {
+        if ($this->tagsAlreadyLoaded === false) {
             if ($event instanceof ScenarioScope) {
                 $feature = $event->getFeature();
                 $scenario = $event->getScenario();
@@ -70,21 +73,22 @@ class FixtureContext extends MinkContext
                     $this->tags = array_merge($this->tags, $scenario->getTags());
                 }
             }
-            $this->tagLoaded = true;
+            $this->tagsAlreadyLoaded = true;
         }
     }
 
     /**
-     * @param $name
+     * @param string $tagName
      *
      * @return array
      */
-    private function getContentOfTags($name)
+    private function getContentOfTags($tagName)
     {
         $tagContent = [];
+
         foreach ($this->tags as $tag) {
             $matches = [];
-            if (preg_match(sprintf('/^%s\((.*)\)$/', $name), $tag, $matches)) {
+            if (preg_match(sprintf('/^%s\((.*)\)$/', $tagName), $tag, $matches)) {
                 $tagContent[] = end($matches);
             }
         }
@@ -92,12 +96,15 @@ class FixtureContext extends MinkContext
         return $tagContent;
     }
 
-    private function loadFiles(array $files)
+    /**
+     * @param array $fileNames
+     */
+    private function loadFiles(array $fileNames)
     {
         $directory = rtrim($this->fixtureDirectory, '/');
 
-        foreach($files as $file) {
-            include sprintf("%s/%s.php", $directory, $file);
+        foreach($fileNames as $fileName) {
+            include sprintf("%s/%s.php", $directory, $fileName);
         }
     }
 }
