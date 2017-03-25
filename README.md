@@ -22,7 +22,7 @@ default:
 
 ### Resetting & Refreshing the Database
 
-This package gives access to a tag that uses the `BeforeScenario` hook. It refreshes your database migrations before each scenario, use `@db-refresh` either before a feature, or a scenario:
+This package gives access to a tag that uses the `BeforeScenario` hook. It refreshes your database migrations before each scenario, use `@db-refresh` either before every scenario in a feature, or individual scenarios:
 
 ```gherkin
 # Will be called before each scenario in the feature
@@ -56,7 +56,7 @@ $user = new \App\User(['name' => 'Matt', 'email' => 'thing@thing.com', 'password
 $user->save();
 ```
 
-You can then load this file with the following:
+You can then load these fixture files with the `@fixture` tag, where the tag content is the fixture file name (minus the `.php` extension):
 
 ```gherkin
 @db-refresh
@@ -70,7 +70,7 @@ Feature:
 
 ```
 
-If you wanted to load lots of fixtures for a scenario, you can do so:
+If you wanted to load multiple fixtures for a scenario, you can do so:
 
 ```gherkin
 @db-refresh
